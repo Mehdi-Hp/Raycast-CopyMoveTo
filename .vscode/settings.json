@@ -1,0 +1,20 @@
+{
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.preferences.includePackageJsonAutoImports": "on",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"typescript.preferences.autoImportFileExcludePatterns": [
+		"@vue/runtime-core",
+		"@vue/runtime-dom"
+	],
+	"typescript.suggest.autoImports": true,
+
+	"editor.tabSize": 4,
+
+	"editor.detectIndentation": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	}
+}
