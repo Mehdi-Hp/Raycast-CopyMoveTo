@@ -1,6 +1,7 @@
 import { Action, ActionPanel, Form, LocalStorage, Toast, popToRoot, showToast } from "@raycast/api";
 
 import { FormValidation, useForm } from "@raycast/utils";
+import { useEffect, useState } from "react";
 import { type Destination, destinationRepo } from "./repo/destination";
 import { checkDirExists } from "./utils/filesystem";
 
@@ -12,6 +13,16 @@ export type DestinationForm = Omit<Destination, "directory"> & {
   directory: string[];
 };
 export default function DestinationForm(props: EditDestinationProps) {
+  const [existingNames, setExistingNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function fetchExistingNames() {
+      const destinations = await destinationRepo.getAll();
+      setExistingNames(Object.keys(destinations));
+    }
+    fetchExistingNames();
+  }, []);
+
   const { handleSubmit, itemProps } = useForm<DestinationForm>({
     async onSubmit(values) {
       const allDestinations = await destinationRepo.getAll();
@@ -54,7 +65,23 @@ export default function DestinationForm(props: EditDestinationProps) {
       enableMove: props.destination?.enableMove ?? true,
     },
     validation: {
-      name: FormValidation.Required,
+      name: (value) => {
+        if (!value) {
+          return "Name is required";
+        }
+
+        // Skip validation if we're editing and the name hasn't changed
+        if (props.destination && value === props.destination.name) {
+          return;
+        }
+
+        // Check if the name already exists
+        if (existingNames.includes(value)) {
+          return "A destination with this name already exists";
+        }
+
+        return;
+      },
       directory: FormValidation.Required,
     },
   });
