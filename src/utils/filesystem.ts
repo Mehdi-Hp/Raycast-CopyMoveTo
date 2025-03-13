@@ -15,10 +15,6 @@ export async function transfer(source: string, destination: string, operation: "
     const srcStat = await fs.lstat(source);
 
     if (srcStat.isDirectory()) {
-      if (!(await checkDirExists(source))) {
-        throw new Error(`Source directory does not exist: ${source}`);
-      }
-
       let destDir = destination;
       try {
         const destStat = await fs.stat(destination);
