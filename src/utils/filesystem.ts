@@ -40,7 +40,7 @@ export async function transfer(source: string, destination: string, operation: "
       }
 
       if (operation === "move") {
-        await fs.rmdir(source);
+        await fs.rm(source, { recursive: true, force: true });
       }
     } else if (srcStat.isFile()) {
       let destPath = destination;
