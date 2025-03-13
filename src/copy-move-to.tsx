@@ -117,7 +117,7 @@ export default function CopyMoveTo(props: CopyMoveToProps) {
                 await closeMainWindow();
                 await fileAction(item.path, destination.directory);
               } else {
-                return;
+                continue;
               }
               break;
             }
