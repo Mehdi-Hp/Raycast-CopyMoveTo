@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Form, LocalStorage, Toast, popToRoot, showToast } from "@raycast/api";
 
 import { FormValidation, useForm } from "@raycast/utils";
-import { Destination, destinationRepo } from "./repo/destination";
+import { type Destination, destinationRepo } from "./repo/destination";
 import { checkDirExists } from "./utils/filesystem";
 
 interface EditDestinationProps {
