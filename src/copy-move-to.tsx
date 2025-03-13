@@ -159,7 +159,7 @@ export default function CopyMoveTo(props: CopyMoveToProps) {
     } catch (error) {
       await showToast({
         title: `Failed to ${actionText} files`,
-        style: Toast.Style.Success,
+        style: Toast.Style.Failure,
       });
     }
   }
